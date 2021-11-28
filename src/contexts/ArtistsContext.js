@@ -7,7 +7,7 @@ const artistCollectionRef = collection(db, 'artists');
 export const artistsContext = createContext();
 
 const INIT_STATE = {
-  artits: [],
+  artists: [],
 };
 
 const reducer = (state = INIT_STATE, action) => {
@@ -34,7 +34,7 @@ const ArtistsContextProvider = ({ children }) => {
 
   return (
     <artistsContext.Provider
-      value={{ artist: state.artists, createArtist, getArtists }}>
+      value={{ artists: state.artists, createArtist, getArtists }}>
       {children}
     </artistsContext.Provider>
   );
