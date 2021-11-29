@@ -1,0 +1,31 @@
+.player {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  background-color: #212121;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.player-details {
+  display: flex;
+  flex: 0 0 33%;
+}
+
+.player-controls {
+  flex: 0 0 33%;
+}
+
+.player-details-img {
+  width: 56px;
+}
+
+.player-volume {
+  flex: 0 0 33%;
+  display: flex;
+  justify-content: center;
+}

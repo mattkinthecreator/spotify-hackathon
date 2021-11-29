@@ -1,37 +1,33 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { artistsContext } from '../../contexts/ArtistsContext'
-import { AiFillPlayCircle, AiFillPauseCircle } from 'react-icons/ai'
-import { doc, updateDoc } from '@firebase/firestore'
-import { db } from '../../helpers/fire'
-import Player from '../Player/Player'
+import React, { useContext, useEffect } from 'react';
+import { artistsContext } from '../../contexts/ArtistsContext';
+import Content from '../Content/Content';
+import Header from '../Header/Header';
+import Player from '../Player/Player';
+import Sidebar from '../Sidebar/Sidebar';
 
 const Home = () => {
-  const { artists, getArtists } = useContext(artistsContext)
+  const { artists, getArtists } = useContext(artistsContext);
 
   useEffect(() => {
-    getArtists()
-  }, [])
-
-  // let updateActive = async (id, song) => {
-  //   const artistDoc = doc(db, 'artists', id)
-  //   let artistsCopy = artists[0]
-  //   let newSongArray = artists[0].albums[0].songs.map((item) => {
-  //     if (item.song_title === song.song_title) {
-  //       item.active = item.active ? false : true
-  //     }
-  //     return item
-  //   })
-  //   await updateDoc(artistDoc, artistsCopy)
-  //   getArtists()
-  // }
+    getArtists();
+  }, []);
 
   return (
     <div className="home">
       <div className="container">
-        {artists[0] && <Player songs={artists[0].albums[0].songs} />}
+        <Sidebar />
+        <Header />
+        <Content />
+        {artists[0] && (
+          <Player
+            songs={artists[0].albums[0].songs}
+            cover={artists[0].albums[0].album_cover}
+            artist={artists[0].artist}
+          />
+        )}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

@@ -1,0 +1,17 @@
+.sidebar {
+  background-color: #000;
+  width: 245px;
+  height: 100%;
+  grid-area: Sidebar;
+}
+
+.fav-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.icon {
+  color: rgba(255, 255, 255, 0.8);
+  width: 24px;
+  height: 24px;
+}
