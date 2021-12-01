@@ -1,0 +1,9 @@
+.add-artist-inp {
+  width: 25%;
+  height: 35px;
+  background-color: #212121;
+  outline: none;
+  border: none;
+  padding-left: 10px;
+  color: #b3b3b3;
+}

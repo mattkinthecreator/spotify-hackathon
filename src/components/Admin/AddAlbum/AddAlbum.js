@@ -1,10 +1,10 @@
 import { getDownloadURL, ref, uploadBytesResumable } from '@firebase/storage';
 import React, { useContext, useState } from 'react';
-import { artistsContext } from '../../contexts/ArtistsContext';
-import { storage } from '../../helpers/fire';
-import './style.css';
+import { artistsContext } from '../../../contexts/ArtistsContext';
+import { storage } from '../../../helpers/fire';
+import './AddAlbum.css';
 
-const Upload = () => {
+const AddAlbum = () => {
   const [artist, setArtist] = useState('');
   const [album, setAlbum] = useState('');
   const [coverUrl, setCoverUrl] = useState(null);
@@ -12,7 +12,8 @@ const Upload = () => {
 
   const [addSong, setAddSong] = useState(false);
 
-  const { createArtist } = useContext(artistsContext);
+  const { addNewAlbum, searchedArtist, searchArtists } =
+    useContext(artistsContext);
 
   async function uploadCover(e) {
     const file = e.target.files[0];
@@ -24,6 +25,7 @@ const Upload = () => {
   }
 
   async function uploadSong(e) {
+    console.log(e.target.parentNode.previousSibling.previousSibling.value);
     const file = e.target.files[0];
     const storageRef = ref(storage, `${file.name}`);
     const uploadTask = uploadBytesResumable(storageRef, file);
@@ -39,49 +41,68 @@ const Upload = () => {
 
   function handleCreate() {
     let obj = {
-      artist,
-      albums: [
-        {
-          album,
-          songs,
-          album_cover: coverUrl,
-        },
-      ],
+      album,
+      songs,
+      album_cover: coverUrl,
     };
-    createArtist(obj);
+    addNewAlbum(artist, obj);
   }
 
   return (
     <div className="upload">
+      <div className="upload-search">
+        <input
+          type="text"
+          placeholder="Найти артиста"
+          onChange={(e) => searchedArtist(e.target.value)}
+          className="upload-input"
+        />
+        {searchArtists.map((item, index) => (
+          <button
+            key={index}
+            onClick={() => setArtist(item)}
+            className="upload-artist-option">
+            {item.artist}
+          </button>
+        ))}
+      </div>
+      {artist.artist && <p className="upload-artist">{artist.artist}</p>}
       <input
         type="text"
-        placeholder="Artist"
-        onChange={(e) => setArtist(e.target.value)}
-      />
-      <input
-        type="text"
-        placeholder="Album"
+        placeholder="Альбом"
         onChange={(e) => setAlbum(e.target.value)}
+        className="upload-input"
       />
       <br />
-      <p>Upload album cover</p>
+      <p>Загрузить обложку альбома</p>
       <label className="upload__label">
         +
         <input type="file" onChange={uploadCover} className="upload__file" />
       </label>
       {coverUrl && <img src={coverUrl} alt="cover" width="200" height="200" />}
       {addSong && (
-        <div>
-          <input name="song" type="text" placeholder="Song Title" />
-          <p>Upload song</p>
+        <>
+          <input
+            name="song"
+            type="text"
+            placeholder="Название песни"
+            className="upload-input"
+          />
+          <p>Загрузить песню</p>
           <label className="upload__label">
             +
             <input type="file" onChange={uploadSong} className="upload__file" />
           </label>
-          <button onClick={() => setAddSong(false)}>Add</button>
-        </div>
+          <button onClick={() => setAddSong(false)} className="upload-btn">
+            Добавить
+          </button>
+        </>
       )}
-      {!addSong && <button onClick={() => setAddSong(true)}>Add song</button>}
+      {!addSong && (
+        <button onClick={() => setAddSong(true)} className="upload-btn">
+          Добавить песню
+        </button>
+      )}
       {songs ? (
         <>
           {songs.map((item) => (
@@ -89,9 +110,11 @@ const Upload = () => {
           ))}
         </>
       ) : null}
-      <button onClick={handleCreate}>Create Artist</button>
+      <button onClick={handleCreate} className="upload-btn">
+        Создать альбом
+      </button>
     </div>
   );
 };
 
-export default Upload;
+export default AddAlbum;

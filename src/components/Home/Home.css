@@ -1,0 +1,25 @@
+.profile {
+  width: 100%;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  padding-left: 40px;
+}
+
+.profile-picture-wrapper {
+  width: 232px;
+  height: 232px;
+  background-color: #282828;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  box-shadow: 0 4px 60px rgb(0 0 0 / 50%);
+}
+
+.profile-picture {
+  width: 64px;
+}

@@ -1,11 +1,12 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import ControlPanel from './Controls/ControlPanel';
 import Slider from './Slider/Slider';
 import './Player.css';
 import { GoUnmute, GoMute } from 'react-icons/go';
+import { artistsContext } from '../../contexts/ArtistsContext';
+import NoCover from '../../assets/imgs/no-album-cover.png';
 
-const Player = ({ songs, cover, artist }) => {
-  const [songsPlaylist, setSongsPlaylist] = useState(songs);
+const Player = () => {
   const [percentage, setPercentage] = useState(0);
   const [currentSongIndex, setCurrentSongIndex] = useState(0);
   const [nextSongIndex, setNextSongIndex] = useState(currentSongIndex + 1);
@@ -16,60 +17,74 @@ const Player = ({ songs, cover, artist }) => {
   const [muted, setMuted] = useState(false);
   const audioEl = useRef(null);
 
+  const { currentArtist, currentAlbum } = useContext(artistsContext);
+
   useEffect(() => {
-    setNextSongIndex(() => {
-      if (currentSongIndex + 1 > songsPlaylist.length) {
-        return 0;
-      } else {
-        return currentSongIndex + 1;
-      }
-    });
+    if (currentAlbum.songs) {
+      setNextSongIndex(() => {
+        if (currentSongIndex + 1 > currentAlbum.songs.length) {
+          return 0;
+        } else {
+          return currentSongIndex + 1;
+        }
+      });
+    }
   }, [currentSongIndex]);
 
   useEffect(() => {
-    if (isPlaying) {
-      audioEl.current.play();
-    } else {
-      audioEl.current.pause();
+    if (audioEl.current) {
+      if (isPlaying) {
+        audioEl.current.play();
+      } else {
+        audioEl.current.pause();
+      }
     }
   });
 
   const skipSong = (forwards = true) => {
-    if (forwards) {
-      setCurrentSongIndex(() => {
-        let temp = currentSongIndex;
-        temp++;
-        if (temp > songs.length - 1) {
-          temp = 0;
-        }
-        return temp;
-      });
-    } else {
-      setCurrentSongIndex(() => {
-        let temp = currentSongIndex;
-        temp--;
-        if (temp < 0) {
-          temp = songs.length - 1;
-        }
-        return temp;
-      });
+    if (currentAlbum.songs) {
+      if (forwards) {
+        setCurrentSongIndex(() => {
+          let temp = currentSongIndex;
+          temp++;
+          if (temp > currentAlbum.songs.length - 1) {
+            temp = 0;
+          }
+          return temp;
+        });
+      } else {
+        setCurrentSongIndex(() => {
+          let temp = currentSongIndex;
+          temp--;
+          if (temp < 0) {
+            temp = currentAlbum.songs.length - 1;
+          }
+          return temp;
+        });
+      }
     }
   };
 
   const handleVolumeChange = (e) => {
-    setVolume(e.target.value);
-    audioEl.current.volume = volume / 100;
+    if (audioEl.current) {
+      setVolume(e.target.value);
+      audioEl.current.volume = volume / 100;
+    }
   };
 
   const handleMute = () => {
-    audioEl.current.muted = !muted;
-    setMuted(!muted);
+    if (audioEl.current) {
+      audioEl.current.muted = !muted;
+      setMuted(!muted);
+    }
   };
 
   const onChange = (e) => {
     const audio = audioEl.current;
-    audio.currentTime = (audio.duration / 100) * e.target.value;
-    setPercentage(e.target.value);
+    if (audio) {
+      audio.currentTime = (audio.duration / 100) * e.target.value;
+      setPercentage(e.target.value);
+    }
   };
 
   const getCurrDuration = (e) => {
@@ -85,31 +100,49 @@ const Player = ({ songs, cover, artist }) => {
 
   const play = () => {
     const audio = audioEl.current;
-    if (!isPlaying) {
-      setIsPlaying(true);
-      audio.play();
-    }
+    if (audio) {
+      if (!isPlaying) {
+        setIsPlaying(true);
+        audio.play();
+      }
 
-    if (isPlaying) {
-      setIsPlaying(false);
-      audio.pause();
+      if (isPlaying) {
+        setIsPlaying(false);
+        audio.pause();
+      }
     }
   };
 
   return (
     <div className="player">
-      <audio
-        src={songsPlaylist[currentSongIndex].song_link}
-        ref={audioEl}
-        onTimeUpdate={getCurrDuration}
-        onLoadedData={(e) => {
-          setDuration(e.currentTarget.duration.toFixed(2));
-        }}></audio>
+      {currentAlbum.songs && (
+        <audio
+          src={currentAlbum.songs[currentSongIndex].song_link}
+          ref={audioEl}
+          onTimeUpdate={getCurrDuration}
+          onLoadedData={(e) => {
+            setDuration(e.currentTarget.duration.toFixed(2));
+          }}></audio>
+      )}
       <div className="player-details">
-        <img src={cover} alt="cover" className="player-details-img" />
+        {currentAlbum.album_cover ? (
+          <img
+            src={currentAlbum.album_cover}
+            alt="cover"
+            className="player-details-img"
+          />
+        ) : (
+          <img
+            src={NoCover}
+            alt="No Album Cover"
+            className="player-details-img"
+          />
+        )}
         <div className="player-details-text">
-          <p>{songs[currentSongIndex].song_title}</p>
-          <p>{artist}</p>
+          {currentAlbum.songs && (
+            <p>{currentAlbum.songs[currentSongIndex].song_title}</p>
+          )}
+          {currentArtist.artist && <p>{currentArtist.artist}</p>}
         </div>
       </div>
       <div className="player-controls">

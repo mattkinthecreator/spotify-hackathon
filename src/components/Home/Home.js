@@ -1,30 +1,18 @@
 import React, { useContext, useEffect } from 'react';
-import { artistsContext } from '../../contexts/ArtistsContext';
-import Content from '../Content/Content';
-import Header from '../Header/Header';
-import Player from '../Player/Player';
-import Sidebar from '../Sidebar/Sidebar';
+import { authContext } from '../../contexts/AuthContext';
+import NoPfp from '../../assets/imgs/NoPfp.svg';
+import './Home.css';
 
 const Home = () => {
-  const { artists, getArtists } = useContext(artistsContext);
-
-  useEffect(() => {
-    getArtists();
-  }, []);
+  const { user } = useContext(authContext);
 
   return (
-    <div className="home">
-      <div className="container">
-        <Sidebar />
-        <Header />
-        <Content />
-        {artists[0] && (
-          <Player
-            songs={artists[0].albums[0].songs}
-            cover={artists[0].albums[0].album_cover}
-            artist={artists[0].artist}
-          />
-        )}
+    <div className="profile">
+      <div className="profile-header">
+        <div className="profile-picture-wrapper">
+          <img src={NoPfp} alt="Empty" className="profile-picture" />
+        </div>
+        <h1>{user.email}</h1>
       </div>
     </div>
   );

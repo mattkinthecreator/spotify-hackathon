@@ -7,3 +7,10 @@
   justify-content: flex-end;
   padding-right: 30px;
 }
+
+.profile-link,
+.profile-link:hover,
+.profile-link:visited {
+  text-decoration: none;
+  color: #e9ebf0;
+}

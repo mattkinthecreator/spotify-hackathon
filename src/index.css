@@ -14,15 +14,13 @@ body {
 
 .container {
   display: grid;
-  grid-template-columns: 0.3fr 1.3fr 1fr;
-  grid-template-rows: 0.3fr 3.4fr 1fr;
+  grid-template-columns: 0.3fr 2.4fr 0.1fr;
+  grid-template-rows: 0.3fr 3.9fr 0.5fr;
   gap: 0px 0px;
-  grid-auto-flow: row;
   grid-template-areas:
     'Sidebar Header Header'
     'Sidebar Content Content'
-    'Sidebar Content Content';
-
+    'Player Player Player';
   width: 100vw;
   height: 100vh;
 }

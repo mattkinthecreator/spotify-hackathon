@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './Sidebar.css';
 import FavIcon from '../../assets/imgs/spotify-fav.png';
-import { BiHomeAlt } from 'react-icons/bi';
+import { BiHomeAlt, BiUser } from 'react-icons/bi';
 import { BsSearch } from 'react-icons/bs';
+import { authContext } from '../../contexts/AuthContext';
+import { Link } from 'react-router-dom';
 
 const Sidebar = () => {
+  const { isAdmin } = useContext(authContext);
+
   return (
     <div className="sidebar">
       <ul>
@@ -19,6 +23,12 @@ const Sidebar = () => {
           <img src={FavIcon} alt="fav icon" className="fav-icon" />
           Любимые треки
         </li>
+        {isAdmin ? (
+          <li>
+            <BiUser className="icon" />
+            <Link to="/admin">Админ панель</Link>
+          </li>
+        ) : null}
       </ul>
     </div>
   );
