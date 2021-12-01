@@ -1,0 +1,19 @@
+.search {
+  grid-area: Content;
+  padding: 40px;
+  overflow-y: scroll;
+  width: 100%;
+  height: 100%;
+}
+
+.search-result-img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+
+.search-result-link,
+.search-result-link:hover {
+  display: block;
+  color: #fff;
+}
