@@ -6,7 +6,7 @@ import {
   getDocs,
   updateDoc,
 } from '@firebase/firestore'
-import React, { useReducer, createContext } from 'react'
+import React, { useReducer, createContext, useState } from 'react'
 import { db } from '../helpers/fire'
 
 const artistCollectionRef = collection(db, 'artists')
@@ -46,6 +46,7 @@ const reducer = (state = INIT_STATE, action) => {
 
 const ArtistsContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, INIT_STATE)
+  const [isPlaying, setIsPlaying] = useState(false)
 
   const createArtist = async (obj) => {
     await addDoc(artistCollectionRef, obj)
@@ -118,6 +119,8 @@ const ArtistsContextProvider = ({ children }) => {
         searchedArtists: state.searchedArtists,
         artistDetails: state.artistDetails,
         albumDetails: state.albumDetails,
+        isPlaying,
+        setIsPlaying,
         createArtist,
         getArtists,
         getSearchArtist,

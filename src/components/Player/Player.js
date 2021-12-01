@@ -7,12 +7,12 @@ import { artistsContext } from '../../contexts/ArtistsContext'
 import NoCover from '../../assets/imgs/no-album-cover.png'
 
 const Player = () => {
-  const { currentArtist, currentAlbum, songIndex } = useContext(artistsContext)
+  const { currentArtist, currentAlbum, songIndex, isPlaying, setIsPlaying } =
+    useContext(artistsContext)
 
   const [percentage, setPercentage] = useState(0)
   const [currentSongIndex, setCurrentSongIndex] = useState(0)
   const [nextSongIndex, setNextSongIndex] = useState(currentSongIndex + 1)
-  const [isPlaying, setIsPlaying] = useState(false)
   const [duration, setDuration] = useState(0)
   const [currentTime, setCurrentTime] = useState(0)
   const [volume, setVolume] = useState(100)

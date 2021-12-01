@@ -5,8 +5,13 @@ import './AlbumDetails.css'
 import { AiFillPlayCircle, AiFillPauseCircle } from 'react-icons/ai'
 
 const AlbumDetails = () => {
-  const { getAlbumDetails, albumDetails, setCurrentAlbum } =
-    useContext(artistsContext)
+  const {
+    getAlbumDetails,
+    albumDetails,
+    setCurrentAlbum,
+    isPlaying,
+    setIsPlaying,
+  } = useContext(artistsContext)
 
   const artistId = useLocation().pathname.split('/')[3]
 
@@ -32,11 +37,12 @@ const AlbumDetails = () => {
             <h3>Треки</h3>
             {albumDetails.songs.map((song, index) => (
               <div className="aldbum-details-song">
-                <p key={index}>
-                  {index + 1}. {song.song_title}
-                </p>
+                <span key={index}>{song.song_title}</span>
                 <AiFillPlayCircle
-                  onClick={() => setCurrentAlbum(albumDetails, index)}
+                  onClick={() => {
+                    setIsPlaying(!isPlaying)
+                    setCurrentAlbum(albumDetails, index)
+                  }}
                 />
               </div>
             ))}
