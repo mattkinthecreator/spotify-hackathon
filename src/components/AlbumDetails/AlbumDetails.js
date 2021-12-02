@@ -1,8 +1,8 @@
-import React, { useContext, useEffect } from 'react'
-import { useLocation, useParams } from 'react-router'
-import { artistsContext } from '../../contexts/ArtistsContext'
-import './AlbumDetails.css'
-import { AiFillPlayCircle, AiFillPauseCircle } from 'react-icons/ai'
+import React, { useContext, useEffect } from 'react';
+import { useLocation, useParams } from 'react-router';
+import { artistsContext } from '../../contexts/ArtistsContext';
+import './AlbumDetails.css';
+import { AiFillPlayCircle, AiFillPauseCircle } from 'react-icons/ai';
 
 const AlbumDetails = () => {
   const {
@@ -11,15 +11,18 @@ const AlbumDetails = () => {
     setCurrentAlbum,
     isPlaying,
     setIsPlaying,
-  } = useContext(artistsContext)
+    artistDetails,
+    getArtistDetails,
+  } = useContext(artistsContext);
 
-  const artistId = useLocation().pathname.split('/')[3]
+  const artistId = useLocation().pathname.split('/')[3];
 
-  const albumId = useParams().id
+  const albumId = useParams().id;
 
   useEffect(() => {
-    getAlbumDetails(artistId, albumId)
-  }, [])
+    getAlbumDetails(artistId, albumId);
+    getArtistDetails(artistId);
+  }, []);
 
   return (
     <div className="album-details">
@@ -31,17 +34,17 @@ const AlbumDetails = () => {
               alt={albumDetails.album}
               className="album-details-cover"
             />
-            <h2>{albumDetails.album}</h2>
+            <h2 className="album-title">{albumDetails.album}</h2>
           </div>
           <div className="album-details-songs">
             <h3>Треки</h3>
             {albumDetails.songs.map((song, index) => (
-              <div className="aldbum-details-song">
+              <div className="album-details-song">
                 <span key={index}>{song.song_title}</span>
                 <AiFillPlayCircle
                   onClick={() => {
-                    setIsPlaying(!isPlaying)
-                    setCurrentAlbum(albumDetails, index)
+                    setIsPlaying(!isPlaying);
+                    setCurrentAlbum(albumDetails, index, artistDetails);
                   }}
                 />
               </div>
@@ -50,7 +53,7 @@ const AlbumDetails = () => {
         </>
       ) : null}
     </div>
-  )
-}
+  );
+};
 
-export default AlbumDetails
+export default AlbumDetails;

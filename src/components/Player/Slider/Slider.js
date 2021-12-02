@@ -1,41 +1,71 @@
-import { useState, useRef, useEffect } from 'react'
-import './Slider.css'
-import './Thumb.css'
+import { useState, useRef, useEffect } from 'react';
+import './Slider.css';
+import './Thumb.css';
 
-function Slider({ percentage = 0, onChange }) {
-  const [position, setPosition] = useState(0)
-  const [marginLeft, setMarginLeft] = useState(0)
-  const [progressBarWidth, setProgressBarWidth] = useState(0)
-  const [styleProgress, setStyleProgress] = useState({
-    backgroundColor: '#fff',
-    width: `${progressBarWidth}px`,
-  })
-  const [styleThumb, setStyleThumb] = useState({
-    display: 'none',
-    left: `${position}%`,
-    marginLeft: `${marginLeft}px`,
-  })
+function Slider({ percentage = 0, onChange, currentTime, duration }) {
+  const [position, setPosition] = useState(0);
+  const [marginLeft, setMarginLeft] = useState(0);
+  const [progressBarWidth, setProgressBarWidth] = useState(0);
 
-  const rangeRef = useRef()
-  const thumbRef = useRef()
+  const rangeRef = useRef();
+  const thumbRef = useRef();
 
   useEffect(() => {
-    const rangeWidth = rangeRef.current.getBoundingClientRect().width
-    const thumbWidth = thumbRef.current.getBoundingClientRect().width
-    const centerThumb = (thumbWidth / 100) * percentage * -1
+    const rangeWidth = rangeRef.current.getBoundingClientRect().width;
+    const thumbWidth = thumbRef.current.getBoundingClientRect().width;
+    const centerThumb = (thumbWidth / 100) * percentage * -1;
     const centerProgressBar =
       thumbWidth +
       (rangeWidth / 100) * percentage -
-      (thumbWidth / 100) * percentage
-    setPosition(percentage)
-    setMarginLeft(centerThumb)
-    setProgressBarWidth(centerProgressBar)
-  }, [percentage])
+      (thumbWidth / 100) * percentage;
+    setPosition(percentage);
+    setMarginLeft(centerThumb);
+    setProgressBarWidth(centerProgressBar);
+  }, [percentage]);
+
+  function secondsToHms(seconds) {
+    if (!seconds) return '0:00';
+
+    let duration = seconds;
+    let hours = duration / 3600;
+    duration = duration % 3600;
+
+    let min = parseInt(duration / 60);
+    duration = duration % 60;
+
+    let sec = parseInt(duration);
+
+    if (sec < 10) {
+      sec = `0${sec}`;
+    }
+    if (min < 10) {
+      min = `${min}`;
+    }
+
+    if (parseInt(hours, 10) > 0) {
+      return `${parseInt(hours, 10)}:${min}:${sec}`;
+    } else if (min == 0) {
+      return `0:${sec}`;
+    } else {
+      return `${min}:${sec}`;
+    }
+  }
 
   return (
     <div className="slider-container">
-      <div className="progress-bar-cover" style={styleProgress}></div>
-      <div className="thumb" ref={thumbRef} style={styleThumb}></div>
+      <div className="slider-time">
+        <div className="timer">{secondsToHms(currentTime)}</div>
+        <div className="timer">{secondsToHms(duration)}</div>
+      </div>
+      <div
+        className="progress-bar-cover"
+        style={{
+          width: `${progressBarWidth}px`,
+        }}></div>
+      <div
+        className="thumb"
+        ref={thumbRef}
+        style={{ left: `${position}%`, marginLeft: `${marginLeft}px` }}></div>
       <input
         type="range"
         value={position}
@@ -43,31 +73,9 @@ function Slider({ percentage = 0, onChange }) {
         step="0.01"
         className="range"
         onChange={onChange}
-        onMouseEnter={() => {
-          setStyleProgress({
-            backgroundColor: '#1ed760',
-            width: `${progressBarWidth}px`,
-          })
-          setStyleThumb({
-            display: 'block',
-            left: `${position}%`,
-            marginLeft: `${marginLeft}px`,
-          })
-        }}
-        onMouseLeave={() => {
-          setStyleProgress({
-            backgroundColor: '#fff',
-            width: `${progressBarWidth}px`,
-          })
-          setStyleThumb({
-            display: 'none',
-            left: `${position}%`,
-            marginLeft: `${marginLeft}px`,
-          })
-        }}
       />
     </div>
-  )
+  );
 }
 
-export default Slider
+export default Slider;

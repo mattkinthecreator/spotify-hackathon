@@ -11,6 +11,23 @@
 .player-details {
   display: flex;
   flex: 0 0 33%;
+  gap: 15px;
+}
+
+.player-details-text {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-flow: column;
+}
+
+.current-track {
+  font-size: 14px;
+}
+
+.current-artist {
+  font-size: 11px;
+  color: rgb(179, 179, 179);
 }
 
 .player-controls {
