@@ -24,5 +24,10 @@
 .player-volume {
   flex: 0 0 33%;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
+}
+
+.mute {
+  width: 20px;
+  height: 20px;
 }

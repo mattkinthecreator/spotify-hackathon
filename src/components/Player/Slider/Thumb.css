@@ -1,9 +1,11 @@
-.slider-container {
+.slider-container,
+.slider-volume-container {
   --thumb-width: 10px;
   --thumb-height: 10px;
 }
 
-.range::-webkit-slider-thumb {
+.slider-volume-container .slider-volume-container-range::-webkit-slider-thumb,
+.slider-container .slider-container-range::-webkit-slider-thumb {
   width: var(--thumb-width);
   height: var(--thumb-height);
 

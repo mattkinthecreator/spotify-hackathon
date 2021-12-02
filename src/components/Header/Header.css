@@ -14,3 +14,18 @@
   text-decoration: none;
   color: #e9ebf0;
 }
+
+.search-bar-wrapper input {
+  border: 0;
+  border-radius: 500px;
+  color: #000;
+  height: 40px;
+  padding: 6px 48px;
+  text-overflow: ellipsis;
+  width: 100%;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: normal;
+  line-height: 16px;
+  text-transform: none;
+}

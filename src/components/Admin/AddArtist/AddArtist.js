@@ -43,17 +43,17 @@ const AddArtist = () => {
         onChange={(e) => setArtist(e.target.value)}
       />
       Загрузить фото артиста
-      <label className="add-artist-label">
+      <label className="upload__label">
         +
         <input
           ref={inputFileEl}
           type="file"
           onChange={uploadPicture}
-          className="add-artist-file"
+          className="upload__file"
         />
       </label>
       {artistPicture && <img src={artistPicture} alt={artist} />}
-      <button className="add-artist-btn" onClick={handleCreate}>
+      <button className="upload-btn" onClick={handleCreate}>
         Создать
       </button>
     </div>

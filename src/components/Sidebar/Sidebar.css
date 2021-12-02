@@ -3,6 +3,21 @@
   width: 245px;
   height: 100%;
   grid-area: Sidebar;
+  padding: 20px;
+}
+
+.sidebar ul {
+  list-style-type: none;
+}
+
+.sidebar ul li {
+  display: flex;
+  align-items: center;
+  margin: 10px;
+}
+
+.sidebar ul li a {
+  color: #fff;
 }
 
 .fav-icon {
@@ -14,4 +29,9 @@
   color: rgba(255, 255, 255, 0.8);
   width: 24px;
   height: 24px;
+}
+
+.icon,
+.fav-icon {
+  margin-right: 10px;
 }

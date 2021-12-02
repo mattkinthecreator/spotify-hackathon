@@ -7,3 +7,10 @@
   padding-left: 10px;
   color: #b3b3b3;
 }
+
+.add-artist {
+  display: flex;
+  flex-flow: column;
+  align-items: start;
+  gap: 20px;
+}

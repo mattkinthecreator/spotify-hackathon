@@ -1,10 +1,10 @@
-import React, { useContext, useEffect } from 'react'
-import { useLocation, useParams } from 'react-router'
-import { artistsContext } from '../../contexts/ArtistsContext'
-import './AlbumDetails.css'
-import { AiFillPlayCircle, AiFillPauseCircle } from 'react-icons/ai'
-import { MdFavoriteBorder, MdFavorite } from 'react-icons/md'
-import { authContext } from '../../contexts/AuthContext'
+import React, { useContext, useEffect } from 'react';
+import { useLocation, useParams } from 'react-router';
+import { artistsContext } from '../../contexts/ArtistsContext';
+import './AlbumDetails.css';
+import { AiFillPlayCircle, AiFillPauseCircle } from 'react-icons/ai';
+import { MdFavoriteBorder, MdFavorite } from 'react-icons/md';
+import { authContext } from '../../contexts/AuthContext';
 
 const AlbumDetails = () => {
   const {
@@ -16,17 +16,17 @@ const AlbumDetails = () => {
     songIndex,
     currentAlbum,
     currentArtist,
-  } = useContext(artistsContext)
+  } = useContext(artistsContext);
 
-  const { toggleFavorite, favorites } = useContext(authContext)
+  const { toggleFavorite, favorites } = useContext(authContext);
 
-  const artistId = useLocation().pathname.split('/')[3]
+  const artistId = useLocation().pathname.split('/')[3];
 
-  const albumId = useParams().id
+  const albumId = useParams().id;
 
   useEffect(() => {
-    getAlbumDetails(artistId, albumId)
-  }, [])
+    getAlbumDetails(artistId, albumId);
+  }, []);
 
   return (
     <div className="album-details">
@@ -45,21 +45,25 @@ const AlbumDetails = () => {
             {albumDetails.songs.map((song, index) => (
               <div className="album-details-song">
                 <div className="song">
-                  {currentAlbum.album === albumDetails.album &&
-                  songIndex === index &&
-                  isPlaying ? (
-                    <AiFillPauseCircle
-                      onClick={() => setIsPlaying(!isPlaying)}
-                    />
-                  ) : (
-                    <AiFillPlayCircle
-                      onClick={() => {
-                        setIsPlaying(!isPlaying)
-                        setCurrentAlbum(albumDetails, index)
-                      }}
-                    />
-                  )}
-                  <span key={index}>{song.song_title}</span>
+                  <div className="song-left">
+                    {currentAlbum.album === albumDetails.album &&
+                    songIndex === index &&
+                    isPlaying ? (
+                      <AiFillPauseCircle
+                        className="song-btn"
+                        onClick={() => setIsPlaying(!isPlaying)}
+                      />
+                    ) : (
+                      <AiFillPlayCircle
+                        className="song-btn"
+                        onClick={() => {
+                          setCurrentAlbum(albumDetails, index);
+                          setIsPlaying(!isPlaying);
+                        }}
+                      />
+                    )}
+                    <span key={index}>{song.song_title}</span>
+                  </div>
                   <div className="song-favorites-wrapper">
                     {favorites.songs &&
                     favorites.songs.some(
@@ -93,7 +97,7 @@ const AlbumDetails = () => {
         </>
       ) : null}
     </div>
-  )
-}
+  );
+};
 
-export default AlbumDetails
+export default AlbumDetails;

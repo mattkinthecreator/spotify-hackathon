@@ -1,11 +1,19 @@
 .control-panel {
-  padding: 15px 0;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .timer {
+  width: 24px;
   font-size: 10px;
   font-weight: 200;
   color: rgb(196, 196, 196);
+}
+
+.timer:first-child {
+  margin-right: 5px;
+}
+
+.timer:last-child {
+  margin-left: 5px;
 }
