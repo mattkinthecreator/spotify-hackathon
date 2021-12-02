@@ -33,7 +33,7 @@ const Player = () => {
 
   useEffect(() => {
     setCurrentSongIndex(songIndex)
-    setIsPlaying(true)
+    play()
   }, [songIndex])
 
   useEffect(() => {

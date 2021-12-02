@@ -34,8 +34,20 @@ function Slider({ percentage = 0, onChange }) {
 
   return (
     <div className="slider-container">
-      <div className="progress-bar-cover" style={styleProgress}></div>
-      <div className="thumb" ref={thumbRef} style={styleThumb}></div>
+      <div
+        className="progress-bar-cover"
+        style={{
+          width: `${progressBarWidth}px`,
+        }}
+      ></div>
+      <div
+        className="thumb"
+        ref={thumbRef}
+        style={{
+          left: `${position}%`,
+          marginLeft: `${marginLeft}px`,
+        }}
+      ></div>
       <input
         type="range"
         value={position}
@@ -43,28 +55,6 @@ function Slider({ percentage = 0, onChange }) {
         step="0.01"
         className="range"
         onChange={onChange}
-        onMouseEnter={() => {
-          setStyleProgress({
-            backgroundColor: '#1ed760',
-            width: `${progressBarWidth}px`,
-          })
-          setStyleThumb({
-            display: 'block',
-            left: `${position}%`,
-            marginLeft: `${marginLeft}px`,
-          })
-        }}
-        onMouseLeave={() => {
-          setStyleProgress({
-            backgroundColor: '#fff',
-            width: `${progressBarWidth}px`,
-          })
-          setStyleThumb({
-            display: 'none',
-            left: `${position}%`,
-            marginLeft: `${marginLeft}px`,
-          })
-        }}
       />
     </div>
   )

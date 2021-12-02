@@ -32,7 +32,11 @@ const reducer = (state = INIT_STATE, action) => {
     case 'GET_ARTIST_DETAILS':
       return { ...state, artistDetails: action.payload }
     case 'GET_ALBUM_DETAILS':
-      return { ...state, albumDetails: action.payload }
+      return {
+        ...state,
+        albumDetails: action.payload.album,
+        currentArtist: action.payload.artist,
+      }
     case 'SET_CURRENT_ALBUM':
       return {
         ...state,
@@ -72,7 +76,7 @@ const ArtistsContextProvider = ({ children }) => {
     const album = artist.albums.filter((album) => album.album === albumId)[0]
     dispatch({
       type: 'GET_ALBUM_DETAILS',
-      payload: album,
+      payload: { album, artist },
     })
   }
 
@@ -103,6 +107,7 @@ const ArtistsContextProvider = ({ children }) => {
   }
 
   const setCurrentAlbum = (album, index) => {
+    console.log(album)
     dispatch({
       type: 'SET_CURRENT_ALBUM',
       payload: { album, index },

@@ -10,6 +10,7 @@ import Admin from './components/Admin/Admin'
 import Search from './components/Search/Search'
 import ArtistDetails from './components/ArtistDetails/ArtistDetails'
 import AlbumDetails from './components/AlbumDetails/AlbumDetails'
+import Favorites from './components/Favorites/Favorites'
 
 const MainRoutes = () => {
   const { user, isAdmin } = useContext(authContext)
@@ -27,6 +28,7 @@ const MainRoutes = () => {
             <Route path="/search" element={<Search />} />
             <Route path="/artist/details/:id" element={<ArtistDetails />} />
             <Route path="/album/details/:id/:id" element={<AlbumDetails />} />
+            <Route path="/favorites" element={<Favorites />} />
           </Routes>
         </BrowserRouter>
       ) : (
