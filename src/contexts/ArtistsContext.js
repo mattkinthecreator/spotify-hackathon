@@ -40,8 +40,8 @@ const reducer = (state = INIT_STATE, action) => {
     case 'SET_CURRENT_ALBUM':
       return {
         ...state,
-        currentAlbum: action.payload.album,
         songIndex: action.payload.index,
+        currentAlbum: action.payload.album,
         currentArtist: action.payload.artist,
       };
     default:
