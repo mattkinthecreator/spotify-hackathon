@@ -53,19 +53,35 @@ function Slider({ percentage = 0, onChange, currentTime, duration }) {
 
   return (
     <div className="slider-container">
+<<<<<<< HEAD
       <div className="slider-time">
         <div className="timer">{secondsToHms(currentTime)}</div>
         <div className="timer">{secondsToHms(duration)}</div>
       </div>
+=======
+>>>>>>> 447f917f5946bc2576a67c02142e6f3ec0d72694
       <div
         className="progress-bar-cover"
         style={{
           width: `${progressBarWidth}px`,
+<<<<<<< HEAD
         }}></div>
       <div
         className="thumb"
         ref={thumbRef}
         style={{ left: `${position}%`, marginLeft: `${marginLeft}px` }}></div>
+=======
+        }}
+      ></div>
+      <div
+        className="thumb"
+        ref={thumbRef}
+        style={{
+          left: `${position}%`,
+          marginLeft: `${marginLeft}px`,
+        }}
+      ></div>
+>>>>>>> 447f917f5946bc2576a67c02142e6f3ec0d72694
       <input
         type="range"
         value={position}

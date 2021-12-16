@@ -32,9 +32,15 @@ const Player = () => {
   }, [currentSongIndex]);
 
   useEffect(() => {
+<<<<<<< HEAD
     setCurrentSongIndex(songIndex);
     setIsPlaying(true);
   }, [songIndex]);
+=======
+    setCurrentSongIndex(songIndex)
+    play()
+  }, [songIndex])
+>>>>>>> 447f917f5946bc2576a67c02142e6f3ec0d72694
 
   useEffect(() => {
     if (audioEl.current) {

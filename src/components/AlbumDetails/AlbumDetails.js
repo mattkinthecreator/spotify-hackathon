@@ -3,6 +3,8 @@ import { useLocation, useParams } from 'react-router';
 import { artistsContext } from '../../contexts/ArtistsContext';
 import './AlbumDetails.css';
 import { AiFillPlayCircle, AiFillPauseCircle } from 'react-icons/ai';
+import { MdFavoriteBorder, MdFavorite } from 'react-icons/md';
+import { authContext } from '../../contexts/AuthContext';
 
 const AlbumDetails = () => {
   const {
@@ -11,9 +13,12 @@ const AlbumDetails = () => {
     setCurrentAlbum,
     isPlaying,
     setIsPlaying,
-    artistDetails,
-    getArtistDetails,
+    songIndex,
+    currentAlbum,
+    currentArtist,
   } = useContext(artistsContext);
+
+  const { toggleFavorite, favorites } = useContext(authContext);
 
   const artistId = useLocation().pathname.split('/')[3];
 
@@ -21,7 +26,6 @@ const AlbumDetails = () => {
 
   useEffect(() => {
     getAlbumDetails(artistId, albumId);
-    getArtistDetails(artistId);
   }, []);
 
   return (
@@ -40,13 +44,49 @@ const AlbumDetails = () => {
             <h3>Треки</h3>
             {albumDetails.songs.map((song, index) => (
               <div className="album-details-song">
-                <span key={index}>{song.song_title}</span>
-                <AiFillPlayCircle
-                  onClick={() => {
-                    setIsPlaying(!isPlaying);
-                    setCurrentAlbum(albumDetails, index, artistDetails);
-                  }}
-                />
+                <div className="song">
+                  {currentAlbum.album === albumDetails.album &&
+                  songIndex === index &&
+                  isPlaying ? (
+                    <AiFillPauseCircle
+                      onClick={() => setIsPlaying(!isPlaying)}
+                    />
+                  ) : (
+                    <AiFillPlayCircle
+                      onClick={() => {
+                        setIsPlaying(!isPlaying);
+                        setCurrentAlbum(albumDetails, index);
+                      }}
+                    />
+                  )}
+                  <span key={index}>{song.song_title}</span>
+                  <div className="song-favorites-wrapper">
+                    {favorites.songs &&
+                    favorites.songs.some(
+                      (item) => item.song_title === song.song_title
+                    ) ? (
+                      <MdFavorite
+                        onClick={() =>
+                          toggleFavorite(
+                            song,
+                            albumDetails.album_cover,
+                            currentArtist
+                          )
+                        }
+                      />
+                    ) : (
+                      <MdFavoriteBorder
+                        onClick={() =>
+                          toggleFavorite(
+                            song,
+                            albumDetails.album_cover,
+                            currentArtist
+                          )
+                        }
+                      />
+                    )}
+                  </div>
+                </div>
               </div>
             ))}
           </div>
