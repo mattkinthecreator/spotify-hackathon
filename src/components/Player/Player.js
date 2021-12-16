@@ -5,6 +5,10 @@ import './Player.css';
 import { GoUnmute, GoMute } from 'react-icons/go';
 import { artistsContext } from '../../contexts/ArtistsContext';
 import NoCover from '../../assets/imgs/no-album-cover.png';
+<<<<<<< HEAD
+=======
+import { IconContext } from 'react-icons';
+>>>>>>> 803c76ba82cd6b954904a8ecdf60cff62b5c78ee
 
 const Player = () => {
   const { currentArtist, currentAlbum, songIndex, isPlaying, setIsPlaying } =
@@ -33,7 +37,13 @@ const Player = () => {
 
   useEffect(() => {
     setCurrentSongIndex(songIndex);
+<<<<<<< HEAD
     play();
+=======
+    if (!isPlaying) {
+      setIsPlaying(true);
+    }
+>>>>>>> 803c76ba82cd6b954904a8ecdf60cff62b5c78ee
   }, [songIndex]);
 
   useEffect(() => {
@@ -119,6 +129,7 @@ const Player = () => {
   };
 
   return (
+<<<<<<< HEAD
     <div className="player">
       {currentAlbum.songs && (
         <audio
@@ -187,6 +198,63 @@ const Player = () => {
         />
       </div>
     </div>
+=======
+    <IconContext.Provider value={{ className: 'react-icons' }}>
+      <div className="player">
+        {currentAlbum.songs && (
+          <audio
+            src={currentAlbum.songs[currentSongIndex].song_link}
+            ref={audioEl}
+            onTimeUpdate={getCurrDuration}
+            onLoadedData={(e) => {
+              setDuration(e.currentTarget.duration.toFixed(2));
+            }}></audio>
+        )}
+        <div className="player-details">
+          {currentAlbum.album_cover ? (
+            <img
+              src={currentAlbum.album_cover}
+              alt="cover"
+              className="player-details-img"
+            />
+          ) : (
+            <img
+              src={NoCover}
+              alt="No Album Cover"
+              className="player-details-img"
+            />
+          )}
+          <div className="player-details-text">
+            {currentAlbum.songs && (
+              <p>{currentAlbum.songs[currentSongIndex].song_title}</p>
+            )}
+          </div>
+        </div>
+        <div className="player-controls">
+          <ControlPanel play={play} isPlaying={isPlaying} skipSong={skipSong} />
+          <Slider
+            percentage={percentage}
+            onChange={onChange}
+            container="slider-container"
+            duration={duration}
+            currentTime={currentTime}
+          />
+        </div>
+        <div className="player-volume">
+          {muted ? (
+            <GoMute className="mute" onClick={() => handleMute()} />
+          ) : (
+            <GoUnmute className="mute" onClick={() => handleMute()} />
+          )}
+          <Slider
+            percentage={volume}
+            onChange={handleVolumeChange}
+            container="slider-volume-container"
+          />
+        </div>
+      </div>
+    </IconContext.Provider>
+>>>>>>> 803c76ba82cd6b954904a8ecdf60cff62b5c78ee
   );
 };
 

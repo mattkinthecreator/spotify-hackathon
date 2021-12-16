@@ -1,9 +1,24 @@
 .album-details {
   grid-area: Content;
-  padding: 40px;
-  overflow-y: scroll;
+  padding: 30px;
   width: 100%;
   height: 100%;
+}
+
+.album-details-info {
+  display: flex;
+  align-items: flex-end;
+  gap: 30px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.album-details-song {
+  margin-bottom: 10px;
+}
+
+.album-details-songs h3 {
+  margin-bottom: 20px;
 }
 
 .album-details-cover {
@@ -11,6 +26,7 @@
   height: 200px;
 }
 
+<<<<<<< HEAD
 .album-details-info {
   display: flex;
   align-items: center;
@@ -45,4 +61,40 @@
 .album-song-play {
   width: 30px;
   height: 40px;
+=======
+.song {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.song-left {
+  display: flex;
+  align-items: center;
+}
+
+.song-btn {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+@media all and (max-width: 548px) {
+  .album-details-cover {
+    width: 150px;
+    height: 150px;
+  }
+
+  h2 {
+    font-size: 22px;
+    line-height: 32px;
+  }
+}
+
+@media all and (max-width: 320px) {
+  .album-details-cover {
+    width: 150px;
+    height: 150px;
+  }
+>>>>>>> 803c76ba82cd6b954904a8ecdf60cff62b5c78ee
 }

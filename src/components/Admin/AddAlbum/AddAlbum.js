@@ -1,51 +1,53 @@
-import { getDownloadURL, ref, uploadBytesResumable } from '@firebase/storage'
-import React, { useContext, useState } from 'react'
-import { artistsContext } from '../../../contexts/ArtistsContext'
-import { storage } from '../../../helpers/fire'
-import './AddAlbum.css'
+import { getDownloadURL, ref, uploadBytesResumable } from '@firebase/storage';
+import React, { useContext, useState } from 'react';
+import { artistsContext } from '../../../contexts/ArtistsContext';
+import { storage } from '../../../helpers/fire';
+import './AddAlbum.css';
 
 const AddAlbum = () => {
-  const [artist, setArtist] = useState('')
-  const [album, setAlbum] = useState('')
-  const [coverUrl, setCoverUrl] = useState(null)
-  const [songs, setSongs] = useState([])
+  const [artist, setArtist] = useState('');
+  const [album, setAlbum] = useState('');
+  const [genre, setGenre] = useState('');
+  const [coverUrl, setCoverUrl] = useState(null);
+  const [songs, setSongs] = useState([]);
 
-  const [addSong, setAddSong] = useState(false)
+  const [addSong, setAddSong] = useState(false);
 
   const { addNewAlbum, getSearchArtist, searchedArtists } =
-    useContext(artistsContext)
+    useContext(artistsContext);
 
   async function uploadCover(e) {
-    const file = e.target.files[0]
-    const storageRef = ref(storage, `${file.name}`)
-    const uploadTask = uploadBytesResumable(storageRef, file)
+    const file = e.target.files[0];
+    const storageRef = ref(storage, `${file.name}`);
+    const uploadTask = uploadBytesResumable(storageRef, file);
     uploadTask.on('state_changed', null, null, async () => {
-      setCoverUrl(await getDownloadURL(uploadTask.snapshot.ref))
-    })
+      setCoverUrl(await getDownloadURL(uploadTask.snapshot.ref));
+    });
   }
 
   async function uploadSong(e) {
-    console.log(e.target.parentNode.previousSibling.previousSibling.value)
-    const file = e.target.files[0]
-    const storageRef = ref(storage, `${file.name}`)
-    const uploadTask = uploadBytesResumable(storageRef, file)
+    console.log(e.target.parentNode.previousSibling.previousSibling.value);
+    const file = e.target.files[0];
+    const storageRef = ref(storage, `${file.name}`);
+    const uploadTask = uploadBytesResumable(storageRef, file);
     uploadTask.on('state_changed', null, null, async () => {
-      let arr = [...songs]
+      let arr = [...songs];
       arr.push({
         song_title: e.target.parentNode.previousSibling.previousSibling.value,
         song_link: await getDownloadURL(uploadTask.snapshot.ref),
-      })
-      setSongs(arr)
-    })
+      });
+      setSongs(arr);
+    });
   }
 
   function handleCreate() {
     let obj = {
       album,
       songs,
+      genre,
       album_cover: coverUrl,
-    }
-    addNewAlbum(artist, obj)
+    };
+    addNewAlbum(artist, obj);
   }
 
   return (
@@ -61,8 +63,7 @@ const AddAlbum = () => {
           <button
             key={index}
             onClick={() => setArtist(item)}
-            className="upload-artist-option"
-          >
+            className="upload-artist-option">
             {item.artist}
           </button>
         ))}
@@ -72,6 +73,12 @@ const AddAlbum = () => {
         type="text"
         placeholder="Альбом"
         onChange={(e) => setAlbum(e.target.value)}
+        className="upload-input"
+      />
+      <input
+        type="text"
+        placeholder="Жанр"
+        onChange={(e) => setGenre(e.target.value)}
         className="upload-input"
       />
       <br />
@@ -115,7 +122,7 @@ const AddAlbum = () => {
         Создать альбом
       </button>
     </div>
-  )
-}
+  );
+};
 
-export default AddAlbum
+export default AddAlbum;

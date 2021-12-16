@@ -41,8 +41,11 @@ const reducer = (state = INIT_STATE, action) => {
       return {
         ...state,
         songIndex: action.payload.index,
+<<<<<<< HEAD
         currentAlbum: action.payload.album,
         currentArtist: action.payload.artist,
+=======
+>>>>>>> 803c76ba82cd6b954904a8ecdf60cff62b5c78ee
       };
     default:
       return state;
@@ -71,6 +74,10 @@ const ArtistsContextProvider = ({ children }) => {
   };
 
   const getAlbumDetails = async (artistId, albumId) => {
+<<<<<<< HEAD
+=======
+    console.log(artistId);
+>>>>>>> 803c76ba82cd6b954904a8ecdf60cff62b5c78ee
     const artistRef = doc(db, 'artists', artistId);
     const data = await getDoc(artistRef);
     const artist = data.data();

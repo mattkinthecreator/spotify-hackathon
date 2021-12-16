@@ -2,7 +2,17 @@ import { useState, useRef, useEffect } from 'react';
 import './Slider.css';
 import './Thumb.css';
 
+<<<<<<< HEAD
 function Slider({ percentage = 0, onChange, currentTime, duration }) {
+=======
+function Slider({
+  percentage = 0,
+  onChange,
+  container,
+  duration,
+  currentTime,
+}) {
+>>>>>>> 803c76ba82cd6b954904a8ecdf60cff62b5c78ee
   const [position, setPosition] = useState(0);
   const [marginLeft, setMarginLeft] = useState(0);
   const [progressBarWidth, setProgressBarWidth] = useState(0);
@@ -52,6 +62,7 @@ function Slider({ percentage = 0, onChange, currentTime, duration }) {
   }
 
   return (
+<<<<<<< HEAD
     <div className="slider-container">
       <div
         className="progress-bar-cover"
@@ -73,6 +84,37 @@ function Slider({ percentage = 0, onChange, currentTime, duration }) {
         className="range"
         onChange={onChange}
       />
+=======
+    <div className={container}>
+      {container === 'slider-container' ? (
+        <div className="timer">{secondsToHms(currentTime)}</div>
+      ) : null}
+      <div className="progress-bar-wrapper">
+        <div
+          className="progress-bar-cover"
+          style={{
+            width: `${progressBarWidth}px`,
+          }}></div>
+        <div
+          className="thumb"
+          ref={thumbRef}
+          style={{
+            left: `${position}%`,
+            marginLeft: `${marginLeft}px`,
+          }}></div>
+        <input
+          type="range"
+          value={position}
+          ref={rangeRef}
+          step="0.01"
+          className={`${container}-range`}
+          onChange={onChange}
+        />
+      </div>
+      {container === 'slider-container' ? (
+        <div className="timer">{secondsToHms(duration)}</div>
+      ) : null}
+>>>>>>> 803c76ba82cd6b954904a8ecdf60cff62b5c78ee
     </div>
   );
 }

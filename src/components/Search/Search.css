@@ -1,7 +1,6 @@
 .search {
   grid-area: Content;
-  padding: 40px;
-  overflow-y: scroll;
+  padding: 30px;
   width: 100%;
   height: 100%;
 }
@@ -16,4 +15,48 @@
 .search-result-link:hover {
   display: block;
   color: #fff;
+}
+
+h1 {
+  margin-bottom: 40px;
+}
+
+.search-result-wrapper {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  width: 180px;
+}
+
+.genres {
+  display: flex;
+  gap: 15px;
+  flex-flow: wrap;
+}
+
+.genre {
+  width: 150px;
+  height: 150px;
+  display: block;
+  text-decoration: none;
+  color: #fff;
+  font-size: 40px;
+  font-weight: 700;
+  border-radius: 8px;
+}
+
+.genre:hover {
+  text-decoration: none;
+  color: #fff;
+}
+
+.genre-list {
+  grid-area: Content;
+  padding: 30px;
+  width: 100%;
+  height: 100%;
+}
+
+.genre-list h3 {
+  margin-bottom: 30px;
 }

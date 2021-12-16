@@ -45,6 +45,7 @@ const AlbumDetails = () => {
             {albumDetails.songs.map((song, index) => (
               <div className="album-details-song">
                 <div className="song">
+<<<<<<< HEAD
                   {currentAlbum.album === albumDetails.album &&
                   songIndex === index &&
                   isPlaying ? (
@@ -60,6 +61,27 @@ const AlbumDetails = () => {
                     />
                   )}
                   <span key={index}>{song.song_title}</span>
+=======
+                  <div className="song-left">
+                    {currentAlbum.album === albumDetails.album &&
+                    songIndex === index &&
+                    isPlaying ? (
+                      <AiFillPauseCircle
+                        className="song-btn"
+                        onClick={() => setIsPlaying(!isPlaying)}
+                      />
+                    ) : (
+                      <AiFillPlayCircle
+                        className="song-btn"
+                        onClick={() => {
+                          setCurrentAlbum(albumDetails, index);
+                          setIsPlaying(!isPlaying);
+                        }}
+                      />
+                    )}
+                    <span key={index}>{song.song_title}</span>
+                  </div>
+>>>>>>> 803c76ba82cd6b954904a8ecdf60cff62b5c78ee
                   <div className="song-favorites-wrapper">
                     {favorites.songs &&
                     favorites.songs.some(

@@ -9,8 +9,16 @@ const Admin = () => {
   return (
     <div className="admin">
       <div className="admin-nav">
-        <p onClick={() => setDisplay(true)}>Создать артиста</p>
-        <p onClick={() => setDisplay(false)}>Добавить альбом</p>
+        <span
+          onClick={() => setDisplay(true)}
+          className={display ? 'active' : null}>
+          Создать артиста /
+        </span>
+        <span
+          onClick={() => setDisplay(false)}
+          className={display ? null : 'active'}>
+          Добавить альбом
+        </span>
       </div>
       <div className="admin-content">
         {display ? <AddArtist /> : <AddAlbum />}

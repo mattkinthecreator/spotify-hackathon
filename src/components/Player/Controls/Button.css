@@ -3,28 +3,31 @@
   justify-content: center;
   align-items: center;
   width: 120px;
+<<<<<<< HEAD
   height: 50px;
   flex-grow: 1;
   gap: 20px;
+=======
+  flex-grow: 0;
+>>>>>>> 803c76ba82cd6b954904a8ecdf60cff62b5c78ee
 }
 
 .btn-stop,
 .btn-play {
-  height: 60px;
-  width: 50px;
+  height: 40px;
+  width: 30px;
   cursor: pointer;
-  color: #fff;
+  color: #b3b3b3;
 }
 
 .btn-stop:hover,
 .btn-play:hover {
-  height: 70px;
-  width: 60px;
+  color: #fff;
 }
 
 .btn-skip {
-  height: 40px;
-  width: 30px;
+  height: 30px;
+  width: 20px;
   cursor: pointer;
   color: #b3b3b3;
 }

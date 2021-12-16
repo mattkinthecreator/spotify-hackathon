@@ -15,7 +15,7 @@ body {
 .container {
   display: grid;
   grid-template-columns: 0.3fr 2.4fr 0.1fr;
-  grid-template-rows: 0.3fr 3.9fr 0.5fr;
+  grid-template-rows: 0.3fr 4fr 0.4fr;
   gap: 0px 0px;
   grid-template-areas:
     'Sidebar Header Header'
@@ -27,4 +27,42 @@ body {
 
 .app-container {
   background-color: #272727;
+}
+
+@media all and (max-width: 670px) {
+  .sidebar {
+    width: initial;
+  }
+
+  .container {
+    grid-template-columns: 0.1fr 2.6fr 0.1fr;
+  }
+}
+
+@media all and (max-width: 597px) {
+  .header {
+    height: initial;
+    flex-wrap: wrap;
+  }
+
+  .sidebar {
+    width: initial;
+  }
+
+  .container {
+    grid-template-rows: 0.6fr 3.8fr 0.3fr;
+  }
+}
+
+@media all and (max-width: 468px) {
+  .sidebar ul li {
+    flex-flow: column;
+    text-align: center;
+  }
+}
+
+@media all and (max-width: 420px) {
+  .sidebar {
+    padding: 0;
+  }
 }
