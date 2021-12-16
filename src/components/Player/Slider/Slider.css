@@ -53,12 +53,6 @@
   margin: 0 auto;
 }
 
-<<<<<<< HEAD
-.slider-time {
-  display: flex;
-  justify-content: space-between;
-}
-=======
 .slider-container-range {
   transform: translateY(-50%);
 }
@@ -72,4 +66,3 @@
   width: 99%;
   position: relative;
 }
->>>>>>> 803c76ba82cd6b954904a8ecdf60cff62b5c78ee

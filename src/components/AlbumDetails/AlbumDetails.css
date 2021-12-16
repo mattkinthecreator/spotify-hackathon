@@ -26,42 +26,6 @@
   height: 200px;
 }
 
-<<<<<<< HEAD
-.album-details-info {
-  display: flex;
-  align-items: center;
-  gap: 40px;
-  margin-bottom: 30px;
-}
-
-.album-title {
-  font-size: 56px;
-}
-
-.album-details-songs {
-  display: flex;
-  flex-flow: column;
-  gap: 10px;
-}
-
-.album-details-songs h3 {
-  font-size: 30px;
-}
-.album-details-song {
-  display: flex;
-  gap: 10px;
-  align-items: flex-start;
-  padding-left: 30px;
-}
-
-.album-details-song span {
-  font-size: 16px;
-}
-
-.album-song-play {
-  width: 30px;
-  height: 40px;
-=======
 .song {
   display: flex;
   justify-content: space-between;
@@ -96,5 +60,4 @@
     width: 150px;
     height: 150px;
   }
->>>>>>> 803c76ba82cd6b954904a8ecdf60cff62b5c78ee
 }

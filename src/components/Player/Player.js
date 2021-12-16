@@ -5,10 +5,7 @@ import './Player.css';
 import { GoUnmute, GoMute } from 'react-icons/go';
 import { artistsContext } from '../../contexts/ArtistsContext';
 import NoCover from '../../assets/imgs/no-album-cover.png';
-<<<<<<< HEAD
-=======
 import { IconContext } from 'react-icons';
->>>>>>> 803c76ba82cd6b954904a8ecdf60cff62b5c78ee
 
 const Player = () => {
   const { currentArtist, currentAlbum, songIndex, isPlaying, setIsPlaying } =
@@ -37,14 +34,10 @@ const Player = () => {
 
   useEffect(() => {
     setCurrentSongIndex(songIndex);
-<<<<<<< HEAD
-    play();
-=======
     if (!isPlaying) {
       setIsPlaying(true);
     }
->>>>>>> 803c76ba82cd6b954904a8ecdf60cff62b5c78ee
-  }, [songIndex]);
+  }, [currentAlbum, songIndex]);
 
   useEffect(() => {
     if (audioEl.current) {
@@ -128,77 +121,9 @@ const Player = () => {
     }
   };
 
+  console.log(currentSongIndex);
+
   return (
-<<<<<<< HEAD
-    <div className="player">
-      {currentAlbum.songs && (
-        <audio
-          src={currentAlbum.songs[currentSongIndex].song_link}
-          ref={audioEl}
-          onTimeUpdate={getCurrDuration}
-          onLoadedData={(e) => {
-            setDuration(e.currentTarget.duration.toFixed(2));
-          }}
-          onEnded={() => skipSong()}></audio>
-      )}
-      <div className="player-details">
-        {currentAlbum.album_cover ? (
-          <img
-            src={currentAlbum.album_cover}
-            alt="cover"
-            className="player-details-img"
-          />
-        ) : (
-          <img
-            src={NoCover}
-            alt="No Album Cover"
-            className="player-details-img"
-          />
-        )}
-        <div className="player-details-text">
-          {currentAlbum.songs && (
-            <p className="current-track">
-              {currentAlbum.songs[currentSongIndex].song_title}
-            </p>
-          )}
-          {currentArtist.artist && (
-            <p className="current-artist">{currentArtist.artist}</p>
-          )}
-        </div>
-      </div>
-      <div className="player-controls">
-        <ControlPanel
-          play={play}
-          isPlaying={isPlaying}
-          duration={duration}
-          currentTime={currentTime}
-          skipSong={skipSong}
-        />
-        <Slider
-          percentage={percentage}
-          onChange={onChange}
-          duration={duration}
-          currentTime={currentTime}
-        />
-      </div>
-      <div className="player-volume">
-        {muted ? (
-          <GoMute onClick={() => handleMute()} />
-        ) : (
-          <GoUnmute onClick={() => handleMute()} />
-        )}
-        <input
-          type="range"
-          min="0"
-          max="100"
-          value={volume}
-          className="slider"
-          id="myRange"
-          onChange={(e) => handleVolumeChange(e)}
-        />
-      </div>
-    </div>
-=======
     <IconContext.Provider value={{ className: 'react-icons' }}>
       <div className="player">
         {currentAlbum.songs && (
@@ -254,7 +179,6 @@ const Player = () => {
         </div>
       </div>
     </IconContext.Provider>
->>>>>>> 803c76ba82cd6b954904a8ecdf60cff62b5c78ee
   );
 };
 
